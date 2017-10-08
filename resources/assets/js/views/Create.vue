@@ -154,11 +154,11 @@
         data() {
             return {
                 errors: new Errors(),
-                name: 'umar',
+                name: 'Umar Aamer',
                 phone: '123',
-                email: 'umar@gmail.com',
+                email: 'umaraamer@gmail.com',
                 gender: 'male',
-                dob: '94',
+                dob: '22-March-1994',
                 biography: 'nothing..',
                 image: 'img',
                 password: '123',
@@ -171,7 +171,7 @@
                     phone: this.phone,
                     email: this.email,
                     gender: this.gender,
-                    dob: this.gender,
+                    dob: this.dob,
                     biography: this.biography,
                     image: this.image,
                     password: this.password,
@@ -187,7 +187,7 @@
             }
         },
         mounted() {
-            console.log('User Form Component mounted.')
+            console.log('Create page Component mounted.')
         }
     }
 </script>

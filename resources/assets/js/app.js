@@ -19,8 +19,8 @@ Vue.use(VueRouter);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('UserForm', require('./components/UserForm.vue'));
+// Vue.component('example', require('./components/Example.vue'));
+// Vue.component('UserForm', require('./components/UserForm.vue'));
 
 import router from './routes';
 

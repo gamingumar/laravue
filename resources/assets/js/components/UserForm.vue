@@ -37,7 +37,7 @@
         methods: {
             getSkills() {
                 axios.get('/skills')
-                    .then(response => console.log(response.data))
+                    .then(response => console.log(response))
                     .catch(error => console.log(this.errors.record(error)));
 
             },
@@ -55,7 +55,7 @@
             }
         },
         mounted() {
-            console.log('User Form Component mounted.')
+            console.log('User Form2 Component mounted.')
         }
     }
 

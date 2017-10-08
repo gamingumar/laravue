@@ -8,11 +8,7 @@
                 <div class="panel-heading">Create and View User</div>
 
                 <div class="panel-body">
-
-                    {{--<user-form></user-form>--}}
-
-
-
+                    {{-- VUE ROUTER --}}
                     <router-view></router-view>
                 </div>
             </div>

@@ -49,9 +49,20 @@
                 <label for="gender" class="col-md-4 control-label">Gender</label>
 
                 <div class="col-md-6">
-                    <input id="gender" type="text"
-                           v-model="gender"
-                           class="form-control" name="gender">
+                    <!--<input id="gender" type="text"-->
+                           <!--v-model="gender"-->
+                           <!--class="form-control" name="gender">-->
+
+                    <div class="radio">
+                        <label><input
+                                type="radio" @click="errors.clear('gender')"
+                                v-model="gender" name="gender" value="Male">Male</label>
+                    </div>
+                    <div class="radio">
+                        <label><input @click="errors.clear('gender')"
+                                type="radio" v-model="gender"
+                                name="gender" value="Female">Female</label>
+                    </div>
 
                     <span class="help-block" v-if="errors.has('gender')">
                         <strong v-text="errors.get('gender')"></strong>
@@ -114,9 +125,6 @@
             </div>
 
         </form>
-
-
-
     </div>
 </template>
 
@@ -157,7 +165,7 @@
                 name: 'Umar Aamer',
                 phone: '123',
                 email: 'umaraamer@gmail.com',
-                gender: 'male',
+                gender: '',
                 dob: '22-March-1994',
                 biography: 'nothing..',
                 image: 'img',

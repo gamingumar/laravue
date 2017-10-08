@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,18 +35,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $user = User::create($request->all());
+
+        return response(['message' => 'created', 'user_id' => $user->id]);
+//        return response(['message' => 'created', 'user_id' => 2]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return response([
+            'message' => 'USER DETAIL',
+            'user' => $user
+        ]);
     }
 
     /**

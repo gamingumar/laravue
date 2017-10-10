@@ -1,5 +1,10 @@
 # laravue
-Laravel with Vue.js starter
+##Laravel 5.5 with Vue 2 starter.
+- Vue Router Single Page App (SAP)
+- Uploading file and form submit Using Vue2
+- Laravel Validation
+- Fetching data using axios to display
+- Download or clone this repository
 
 ##Windows users:
 - Download wamp: http://www.wampserver.com/en/

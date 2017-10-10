@@ -9,8 +9,9 @@
             <li>gender: {{user.gender}}</li>
             <li>dob: {{user.dob}}</li>
             <li>biography: {{user.biography}}</li>
-            <li>image: {{user.image}}</li>
+            <li>image: <img :src="user.image" style="width: 480px; height: 240px" /></li>
         </ul>
+
     </div>
 
 </template>
@@ -28,6 +29,7 @@
         methods: {
             onSuccess({data}) {
 //            alert(response.data.message);
+                data.user.image = "data:image/jpeg;base64," + data.user.image;
                 this.user = data.user;
                 console.log('from success: ', this.user);
             }

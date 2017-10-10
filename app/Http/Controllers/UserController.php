@@ -42,14 +42,26 @@ class UserController extends Controller
             'gender' => 'required',
             'dob' => 'required|before:-18 years',
             'biography' => 'required|min:10|max:100',
-            'image' => 'required',
+            'image' => 'required|file|mimes:jpeg,bmp,png|max:1024',
 
         ]);
 
-        $user = User::create($request->all());
+        $requestData = $request->all();
+
+        // save image if uploaded
+        if ($request->hasFile('image')) {
+            $image = file_get_contents($request->file('image'));
+
+            $image = base64_encode($image);
+            $requestData['image'] = $image;
+
+        } else {
+            //dd('nothing', $request->all());
+        }
+
+        $user = User::create($requestData);
 
         return response(['message' => 'created', 'user_id' => $user->id]);
-//        return response(['message' => 'created', 'user_id' => 2]);
     }
 
     /**

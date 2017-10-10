@@ -2,6 +2,7 @@
     <div id="form">
         <form class="form-horizontal" method="POST"
               @keydown="errors.clear($event.target.name)"
+              enctype="multipart/form-data"
               action="/create" @submit.prevent="createUser">
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Name</label>
@@ -17,6 +18,7 @@
                 </div>
             </div>
 
+            <!-- phone -->
             <div class="form-group">
                 <label for="phone" class="col-md-4 control-label">Phone</label>
 
@@ -31,6 +33,7 @@
                 </div>
             </div>
 
+            <!-- email -->
             <div class="form-group">
                 <label for="email" class="col-md-4 control-label">Email</label>
 
@@ -45,6 +48,7 @@
                 </div>
             </div>
 
+            <!-- gender -->
             <div class="form-group">
                 <label for="gender" class="col-md-4 control-label">Gender</label>
 
@@ -70,6 +74,7 @@
                 </div>
             </div>
 
+            <!-- date of birth -->
             <div class="form-group">
                 <label for="dob" class="col-md-4 control-label">Date of Birth</label>
 
@@ -84,6 +89,7 @@
                 </div>
             </div>
 
+            <!-- biography -->
             <div class="form-group">
                 <label for="biography" class="col-md-4 control-label">Biography</label>
 
@@ -98,13 +104,19 @@
                 </div>
             </div>
 
+            <!-- image file -->
             <div class="form-group">
                 <label for="image" class="col-md-4 control-label">Image</label>
 
                 <div class="col-md-6">
-                    <input id="image" type="text"
-                           v-model="image"
-                           class="form-control" name="image">
+                    <p>selected file is: {{image.name}}</p>
+
+                    <input type="file"
+                           id="image"
+                           name="image"
+                           accept="image/*"
+                           @change="imageChange($event)"
+                           class="input-file" />
 
                     <span class="help-block" v-if="errors.has('image')">
                         <strong v-text="errors.get('image')"></strong>
@@ -130,6 +142,7 @@
 
 <script>
     import axios from 'axios';
+    import _ from 'lodash';
     import router from '../routes';
 
     class Errors {
@@ -163,35 +176,62 @@
             return {
                 errors: new Errors(),
                 name: 'Umar Aamer',
-                phone: '123',
+                phone: '1234567890123',
                 email: 'umaraamer@gmail.com',
                 gender: '',
                 dob: '22-March-1994',
                 biography: 'nothing..',
-                image: 'img',
+                image: '',
                 password: '123',
             }
         },
         methods: {
             createUser() {
-                let data ={
-                    name: this.name,
-                    phone: this.phone,
-                    email: this.email,
-                    gender: this.gender,
-                    dob: this.dob,
-                    biography: this.biography,
-                    image: this.image,
-                    password: this.password,
-                };
-                axios.post('/users', data)
+//                let data ={
+//                    name: this.name,
+//                    phone: this.phone,
+//                    email: this.email,
+//                    gender: this.gender,
+//                    dob: this.dob,
+//                    biography: this.biography,
+//                    image: this.image,
+//                    password: this.password,
+//                };
+                let formData = new FormData();
+//                _.values(data).map(item => {
+//                    console.log('doinnnn', item);
+//                });
+//                formData.append('data', data);
+//                formData = data;
+                formData.append('name', this.name);
+                formData.append('phone', this.phone);
+                formData.append('email', this.email);
+                formData.append('gender', this.gender);
+                formData.append('dob', this.dob);
+                formData.append('biography', this.biography);
+                formData.append('image', this.image);
+                formData.append('password', this.password);
+
+
+                console.log('sending data: ', formData);
+                axios.post('/users', formData, {headers: {'Content-Type': 'multipart/form-data'}})
                     .then(response => this.onSuccess(response))
                     .catch(error => console.log(this.errors.record(error.response.data)));
             },
             onSuccess(response) {
+                console.log('success', response);
                 alert(response.data.message);
                 router.push({ name: 'view', params: { user_id: response.data.user_id }});
                 this.name = '';
+            },
+            imageChange(event) {
+                if (event.target.files.length) {
+                    this.errors.clear('image');
+                    this.image = event.target.files[0];
+                    console.log('got files', this.image);
+                } else {
+                    console.log('no file selected');
+                }
             }
         },
         mounted() {

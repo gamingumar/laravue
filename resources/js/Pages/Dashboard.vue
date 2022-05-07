@@ -1,9 +1,8 @@
 <script setup>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-import BreezeButton from '@/Components/Button.vue';
-import BreezeClock from '@/Components/Clock.vue';
-
+import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import { Head } from "@inertiajs/inertia-vue3";
+import BreezeButton from "@/Components/Button.vue";
+import Clock from "@/Components/Clock.vue";
 </script>
 
 <template>
@@ -24,7 +23,7 @@ import BreezeClock from '@/Components/Clock.vue';
                     </div>
 
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <BreezeClock />
+                        <Clock />
                     </div>
                 </div>
             </div>

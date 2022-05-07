@@ -34,6 +34,8 @@ runs on http://localhost
 sail tinker
 ```
 
+![Clock in Dashboard](./clock.png)
+
 
 ## About Laravel
 
